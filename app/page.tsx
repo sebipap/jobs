@@ -1,5 +1,6 @@
 import { JobListing } from "@/components/JobListing";
 import { sql } from "@vercel/postgres";
+import Link from "next/link";
 
 // Define the Job type to fix the TypeScript error
 export type Job = {
@@ -26,9 +27,11 @@ export default async function JobBoard() {
             <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
               O(n) Jobs
             </h1>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-              Post a Job
-            </button>
+            <Link href="/admin">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                Post a Job
+              </button>
+            </Link>
           </div>
         </div>
       </header>
