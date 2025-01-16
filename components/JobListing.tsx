@@ -1,4 +1,4 @@
-import { Job } from '@prisma/client'
+import { Job } from "@/app/page";
 
 export function JobListing({ job }: { job: Job }) {
   return (
@@ -6,10 +6,9 @@ export function JobListing({ job }: { job: Job }) {
       <h2 className="text-xl font-semibold text-white mb-2">{job.title}</h2>
       <p className="text-gray-300 mb-2">{job.company}</p>
       <div className="flex justify-between text-sm text-gray-400">
-        <span>{job.remote ? 'Remote' : 'On-site'}</span>
+        <span>{job.remote ? "Remote" : "On-site"}</span>
         <span>{job.seniority}</span>
       </div>
     </div>
-  )
+  );
 }
-
