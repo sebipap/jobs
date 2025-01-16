@@ -1,37 +1,49 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AdminPage() {
   const [formData, setFormData] = useState({
-    company: '',
-    title: '',
+    company: "",
+    title: "",
     remote: false,
-    seniority: '',
-  })
-  const router = useRouter()
+    seniority: "",
+    description: "",
+  });
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const response = await fetch('/api/jobs', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    e.preventDefault();
+    const response = await fetch("/api/jobs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
-    })
+    });
     if (response.ok) {
-      setFormData({ company: '', title: '', remote: false, seniority: '' })
-      router.refresh()
+      setFormData({
+        company: "",
+        title: "",
+        remote: false,
+        seniority: "",
+        description: "",
+      });
+      router.refresh();
     }
-  }
+  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target
-    setFormData(prev => ({
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = e.target;
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
-    }))
-  }
+      [name]:
+        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
@@ -39,7 +51,12 @@ export default function AdminPage() {
         <h1 className="text-2xl font-bold mb-6">Add New Job</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="company" className="block text-sm font-medium text-gray-300">Company</label>
+            <label
+              htmlFor="company"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Company
+            </label>
             <input
               type="text"
               id="company"
@@ -51,7 +68,12 @@ export default function AdminPage() {
             />
           </div>
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-300">Job Title</label>
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Job Title
+            </label>
             <input
               type="text"
               id="title"
@@ -63,7 +85,12 @@ export default function AdminPage() {
             />
           </div>
           <div>
-            <label htmlFor="seniority" className="block text-sm font-medium text-gray-300">Seniority</label>
+            <label
+              htmlFor="seniority"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Seniority
+            </label>
             <select
               id="seniority"
               name="seniority"
@@ -78,6 +105,23 @@ export default function AdminPage() {
               <option value="Senior">Senior</option>
             </select>
           </div>
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+              rows={4}
+              className="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white"
+            />
+          </div>
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -87,7 +131,12 @@ export default function AdminPage() {
               onChange={handleChange}
               className="h-4 w-4 bg-gray-700 border-gray-600 rounded"
             />
-            <label htmlFor="remote" className="ml-2 block text-sm text-gray-300">Remote</label>
+            <label
+              htmlFor="remote"
+              className="ml-2 block text-sm text-gray-300"
+            >
+              Remote
+            </label>
           </div>
           <button
             type="submit"
@@ -98,6 +147,5 @@ export default function AdminPage() {
         </form>
       </div>
     </div>
-  )
+  );
 }
-

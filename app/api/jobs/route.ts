@@ -13,8 +13,8 @@ export async function POST(request: Request) {
   const body = await request.json()
 
   const { rows: [job] } = await sql`
-    INSERT INTO jobs (company, title, remote, seniority, created_at)
-    VALUES (${body.company}, ${body.title}, ${body.remote}, ${body.seniority}, NOW())
+    INSERT INTO jobs (company, title, remote, seniority, description, created_at)
+    VALUES (${body.company}, ${body.title}, ${body.remote}, ${body.seniority}, ${body.description}, NOW())
     RETURNING *
   `
 
