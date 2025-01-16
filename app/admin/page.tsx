@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function AdminPage() {
   const [formData, setFormData] = useState({
@@ -48,6 +49,12 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
       <div className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
+        <Link
+          href="/"
+          className="inline-block mb-6 text-blue-400 hover:text-blue-300"
+        >
+          ← Back to Home
+        </Link>
         <h1 className="text-2xl font-bold mb-6">Add New Job</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
