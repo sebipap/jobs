@@ -2,14 +2,14 @@ import { JobListing } from "@/components/JobListing";
 import { sql } from "@vercel/postgres";
 
 // Define the Job type to fix the TypeScript error
-interface Job {
+export type Job = {
   id: number;
   company: string;
   title: string;
   remote: boolean;
   seniority: string;
   created_at: Date;
-}
+};
 
 export default async function JobBoard() {
   const { rows: jobs } = await sql<Job>`
